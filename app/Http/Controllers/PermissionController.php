@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
-use Spatie\Permission\Models\Permission;
 
 class PermissionController extends Controller
 {
@@ -24,11 +24,21 @@ class PermissionController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:100', 'unique:permissions', 'regex:/^[a-z0-9\-]+$/'],
-            'display_name' => ['required', 'string', 'max:255'],
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                'unique:permissions',
+                'regex:/^[a-z0-9\-]+$/',
+            ],
+            'description' => [
+                'nullable',
+                'string',
+                'max:2000',
+            ],
         ]);
 
-        Permission::create(['name' => $validated['name']]);
+        Permission::create($validated);
 
         return redirect()->route('permissions.index')
             ->with('success', 'Permissão criada com sucesso.');
@@ -43,10 +53,21 @@ class PermissionController extends Controller
     public function update(Request $request, Permission $permission)
     {
         $validated = $request->validate([
-            'name' => ['required', 'string', 'max:100', Rule::unique('permissions')->ignore($permission->id), 'regex:/^[a-z0-9\-]+$/'],
+            'name' => [
+                'required',
+                'string',
+                'max:100',
+                Rule::unique('permissions')->ignore($permission),
+                'regex:/^[a-z0-9\-]+$/',
+            ],
+            'description' => [
+                'nullable',
+                'string',
+                'max:100',
+            ],
         ]);
 
-        $permission->update(['name' => $validated['name']]);
+        $permission->update($validated);
 
         return redirect()->route('permissions.index')
             ->with('success', 'Permissão atualizada com sucesso.');
@@ -54,7 +75,7 @@ class PermissionController extends Controller
 
     public function destroy(Permission $permission)
     {
-        if ($permission->users()->count() > 0) {
+        if ($permission->users()->exists()) {
             return back()->with('error', 'Não é possível excluir uma permissão em uso.');
         }
 
