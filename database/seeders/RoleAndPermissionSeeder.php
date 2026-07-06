@@ -2,8 +2,8 @@
 
 namespace Database\Seeders;
 
+use App\Models\Permission;
 use Illuminate\Database\Seeder;
-use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 
@@ -14,14 +14,32 @@ class RoleAndPermissionSeeder extends Seeder
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            ['name' => 'access-hospital-sectors'],
-            ['name' => 'access-medical-specialties'],
-            ['name' => 'access-equipment'],
-            ['name' => 'access-care-units'],
+            [
+                'name' => 'access-hospital-sectors',
+                'description' => 'Acessar setores hospitalares',
+            ],
+            [
+                'name' => 'access-medical-specialties',
+                'description' => 'Acessar especialidades médicas',
+            ],
+            [
+                'name' => 'access-equipment',
+                'description' => 'Acessar equipamentos',
+            ],
+            [
+                'name' => 'access-care-units',
+                'description' => 'Acessar unidades de atendimento',
+            ],
         ];
 
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission['name']]);
+            Permission::updateOrCreate(
+                ['name' => $permission['name']],
+                [
+                    'guard_name' => 'web',
+                    'description' => $permission['description'] ?? null,
+                ]
+            );
         }
 
         Role::firstOrCreate(['name' => 'admin']);
