@@ -43,6 +43,12 @@ class RoleAndPermissionSeeder extends Seeder
         }
 
         Role::firstOrCreate(['name' => 'admin']);
-        Role::firstOrCreate(['name' => 'collaborator']);
+
+        $collaborator = Role::firstOrCreate(['name' => 'collaborator']);
+
+        $collaborator->syncPermissions([
+            'access-hospital-sectors',
+        ]);
+
     }
 }

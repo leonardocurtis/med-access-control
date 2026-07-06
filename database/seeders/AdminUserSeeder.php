@@ -10,10 +10,10 @@ class AdminUserSeeder extends Seeder
     public function run(): void
     {
         $admin = User::firstOrCreate(
-            ['email' => 'admin@santacasa.org.br'],
+            ['email' => 'admin@medaccess.com'],
             [
                 'name' => 'Administrador',
-                'password' => '12345@teste',
+                'password' => '12345@medaccess',
             ]
         );
 
