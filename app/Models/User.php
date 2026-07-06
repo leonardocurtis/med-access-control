@@ -29,4 +29,16 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    public function getMaskedEmailAttribute(): string
+    {
+        [$name, $domain] = explode('@', $this->email);
+
+        $visible = min(2, strlen($name));
+
+        return substr($name, 0, $visible)
+            .str_repeat('*', 6)
+            .'@'
+            .$domain;
+    }
 }

@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 class ModuleController extends Controller
 {
-        public function hospitalSectors()
+    public function hospitalSectors()
     {
         return view('modules.hospital-sectors');
     }

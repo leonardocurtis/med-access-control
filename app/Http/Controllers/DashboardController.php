@@ -16,6 +16,6 @@ class DashboardController extends Controller
 
         $userPermissions = $user->getAllPermissions();
 
-        return view('dashboard', compact('userPermissions'));
+        return view('users.dashboard', compact('userPermissions'));
     }
 }
