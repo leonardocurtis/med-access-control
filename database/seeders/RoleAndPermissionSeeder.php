@@ -5,19 +5,19 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
-
+use Spatie\Permission\PermissionRegistrar;
 
 class RoleAndPermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        app()[\Spatie\Permission\PermissionRegistrar::class]->forgetCachedPermissions();
+        app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
         $permissions = [
-            ['name' => 'access-hospital-sectors',   'display_name' => 'Setores Hospitalares'],
-            ['name' => 'access-medical-specialties', 'display_name' => 'Especialidades Médicas'],
-            ['name' => 'access-equipment',           'display_name' => 'Equipamentos'],
-            ['name' => 'access-care-units',          'display_name' => 'Unidades Assistenciais'],
+            ['name' => 'access-hospital-sectors'],
+            ['name' => 'access-medical-specialties'],
+            ['name' => 'access-equipment'],
+            ['name' => 'access-care-units'],
         ];
 
         foreach ($permissions as $permission) {

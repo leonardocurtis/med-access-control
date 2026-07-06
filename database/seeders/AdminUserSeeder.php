@@ -13,7 +13,7 @@ class AdminUserSeeder extends Seeder
             ['email' => 'admin@santacasa.org.br'],
             [
                 'name' => 'Administrador',
-                'password' => 'password',
+                'password' => '12345@teste',
             ]
         );
 
