@@ -1,56 +1,72 @@
 <x-app-layout>
-    <x-slot name="header">
-        <h2 class="font-semibold text-xl text-gray-800">Nova Permissão</h2>
-    </x-slot>
+    <section class="items-stretch rounded-lg bg-white p-6 shadow-lg shadow-zinc-400/50">
 
-    <div class="py-12">
-        <div class="max-w-2xl mx-auto sm:px-6 lg:px-8">
-            <div class="bg-white shadow-sm sm:rounded-lg p-6">
+        <div class="px-3 py-3 flex items-center gap-3">
+            <div class="flex h-10 w-10 items-center justify-center rounded-xl bg-zinc-900 text-white">
+                <x-phosphor-shield-warning class="h-6 w-6" />
+            </div>
 
-                @if ($errors->any())
-                    <div class="mb-4 bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded">
-                        <ul class="list-disc list-inside text-sm">
-                            @foreach ($errors->all() as $error)
-                                <li>{{ $error }}</li>
-                            @endforeach
-                        </ul>
-                    </div>
-                @endif
+            <div class="min-w-0">
+                <h1 class="truncate text-lg font-bold">
+                    Cadastrar Nova Permissão
+                </h1>
 
-                <form method="POST" action="{{ route('permissions.store') }}">
-                    @csrf
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
-                        <input type="text" name="name" value="{{ old('name') }}"
-                            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    </div>
-
-                    <div class="mb-4">
-                        <label class="block text-sm font-medium text-gray-700 mb-1">
-                            Descrição
-                        </label>
-
-                        <textarea name="description" id="description" rows="4" placeholder="Ex.: Permite acessar o módulo de radiologia."
-                            class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400" >{{ old('description') }}</textarea>
-                        <div class="flex justify-end mt-1 text-xs italic text-gray-400">
-                            <span id="remaining">100</span>
-                        </div>
-                    </div>
-
-                    <div class="flex gap-3">
-                        <button type="submit" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-                            Salvar
-                        </button>
-                        <a href="{{ route('permissions.index') }}"
-                            class="bg-red-500 text-white px-6 py-2 rounded hover:bg-red-600">
-                            Cancelar
-                        </a>
-                    </div>
-                </form>
+                <p class="truncate text-xs text-gray-500">
+                    Crie uma nova permissão para um colaborador
+                </p>
             </div>
         </div>
-    </div>
+
+        <div>
+            <div class="mt-2 max-w-2xl mx-auto sm:px-6 lg:px-8 shadow">
+                <div class="bg-white shadow-sm sm:rounded-lg p-6">
+
+                    @if ($errors->any())
+                        <div class="mb-4 bg-red-50 border border-red-300 text-red-700 px-4 py-3 rounded">
+                            <ul class="list-disc list-inside text-sm">
+                                @foreach ($errors->all() as $error)
+                                    <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('permissions.store') }}">
+                        @csrf
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Nome</label>
+                            <input type="text" name="name" value="{{ old('name') }}"
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                        </div>
+
+                        <div class="mb-4">
+                            <label class="block text-sm font-medium text-gray-700 mb-1">
+                                Descrição
+                            </label>
+
+                            <textarea name="description" id="description" rows="4" placeholder="Ex.: Permite acessar o módulo de radiologia."
+                                class="w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500 placeholder:text-gray-400">{{ old('description') }}</textarea>
+                            <div class="flex justify-end mt-1 text-xs italic text-gray-400">
+                                <span id="remaining">100</span>
+                            </div>
+                        </div>
+
+                        <div class="flex gap-3">
+                            <button type="submit"
+                                class="rounded-lg bg-[#2979FF] px-6 py-2 text-white shadow-[#2161E5]/50 shadow-lg transition-colors hover:bg-[#2161E5]">
+                                Salvar
+                            </button>
+                            <a href="{{ route('permissions.index') }}"
+                                class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 shadow-red-600/50 shadow-lg">
+                                Cancelar
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
     <script>
         const textarea = document.getElementById('description');
         const remaining = document.getElementById('remaining');

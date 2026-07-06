@@ -1,18 +1,49 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Acesso Negado</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>403: Acesso Negado</title>
+
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
-<body class="flex items-center justify-center min-h-screen bg-gray-50">
-    <div class="text-center">
-        <h1 class="text-6xl font-bold text-red-600">403</h1>
-        <p class="text-xl text-gray-700 mt-4">Acesso Negado</p>
-        <p class="text-gray-500 mt-2">Você não tem permissão para acessar este recurso.</p>
-        <a href="{{ url()->previous() }}" class="mt-6 inline-block bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700">
-            Voltar
-        </a>
+
+<body
+    class="min-h-screen bg-gradient-to-br from-slate-100 via-zinc-100 to-slate-200 flex items-center justify-center px-6">
+
+    <div class="w-full max-w-lg">
+
+        <div class="rounded-3xl bg-white shadow-2xl border border-zinc-200 p-10 text-center">
+            <div class="mx-auto flex h-24 w-24 items-center justify-center rounded-full bg-red-100 shadow-xl">
+                <x-phosphor-warning-octagon class="h-12 w-12 text-red-600" />
+            </div>
+
+            <h1 class="mt-4 text-6xl font-extrabold tracking-tight text-red-600">
+                403
+            </h1>
+
+            <h2 class="mt-4 text-2xl font-bold text-zinc-800">
+                Acesso Negado
+            </h2>
+
+            <p class="mt-4 text-zinc-600 leading-relaxed">
+                Você não possui permissão para acessar esta página.
+                Caso acredite que isso seja um erro, entre em contato com o administrador do sistema.
+            </p>
+
+            <div class="mt-6 flex flex-col sm:flex-row justify-center gap-4">
+
+                <a href="{{ route('dashboard') }}"
+                    class="rounded-xl bg-zinc-900 px-6 py-3 font-medium text-white transition hover:bg-zinc-800">
+                    Voltar
+                </a>
+
+            </div>
+
+        </div>
     </div>
+
 </body>
+
 </html>
